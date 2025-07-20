@@ -1,14 +1,17 @@
 {
-  "name": "vite-starter",
+  "name": "revealjs-slides",
+  "version": "1.0.0",
+  "description": "Life Coach Sharing by Reveal.js presentation without Vite",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "http-server . -p 8080"
   },
   "devDependencies": {
-    "vite": "^7.0.0"
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "highlight.js": "^11.5.0",
+    "reveal.js": "^5.2.1"
   }
 }

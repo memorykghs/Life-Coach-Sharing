@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <title>Life Coaching Sharing</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css"
-      id="theme"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.js"></script>
+
+    <!-- Reveal CSS -->
+    <link rel="stylesheet" href="/dist/reveal.css"/>
+    <link rel="stylesheet" href="/dist/theme/white.css" id="theme"/>
+
+    <!-- Reveal JS -->
+    <script src="/dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
 
     <!-- 自訂 CSS -->
-    <link rel="stylesheet" href="/src/style.css" />
-    <link rel="stylesheet" href="/src/chaos.css" />
-    <link rel="stylesheet" href="/src/about_me.css" />
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides" id="slides-container"></div>
-    </div>
+    <link rel="stylesheet" href="/src/style.css"/>
+    <link rel="stylesheet" href="/src/chaos.css"/>
+    <link rel="stylesheet" href="/src/about_me.css"/>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides" id="slides-container"></div>
+</div>
 
-    <!-- 動態載入 slides -->
-    <script>
-      const slidePaths = [
+<!-- Reveal JS Modules -->
+<script type="module">
+    const slidePaths = [
         'slides/01_cover.html',
         'slides/02_about_me.html',
         'slides/02_01_character.html',
@@ -71,9 +70,9 @@
         'slides/06_04_01_adjustment_diary.html',
         'slides/06_04_02_adjustment_diary.html',
         'slides/06_04_03_adjustment_diary.html',
-        'slides/06_04_04_adjustment_diary.html', 
-        'slides/06_04_05_adjustment_diary.html', 
-        'slides/06_04_06_adjustment_diary.html', 
+        'slides/06_04_04_adjustment_diary.html',
+        'slides/06_04_05_adjustment_diary.html',
+        'slides/06_04_06_adjustment_diary.html',
         'slides/06_05_01_what_i_have.html',
         'slides/06_05_02_what_i_have.html',
         'slides/06_06_my_system_intro.html',
@@ -106,7 +105,7 @@
         'slides/07_01_01_afraid_of_make_mistake.html',
         'slides/07_01_02_afraid_of_make_mistake.html',
         'slides/07_01_03_afraid_of_make_mistake.html',
-        'slides/07_02_dealing_of_anxiety.html',,
+        'slides/07_02_dealing_of_anxiety.html', ,
         'slides/07_03_act_bravely.html',
         'slides/07_04_role_in_family.html',
         'slides/07_05_organize_my_life.html',
@@ -122,29 +121,35 @@
         'slides/09_05_final.html',
         'slides/10_appendix.html',
         'slides/11_thank_you.html',
-      ];
+    ];
 
-      async function loadSlides() {
+    async function loadSlides() {
         const container = document.getElementById('slides-container');
         for (const path of slidePaths) {
-          const res = await fetch(path);
-          const html = await res.text();
-          const temp = document.createElement('div');
-          temp.innerHTML = html;
-          temp.querySelectorAll('section').forEach((section) => {
-            container.appendChild(section);
-          });
+            const res = await fetch(path);
+            const html = await res.text();
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            temp.querySelectorAll('section').forEach((section) => {
+                container.appendChild(section);
+            });
         }
-      }
+    }
 
-      loadSlides().then(() => {
+    loadSlides().then(() => {
         Reveal.initialize({
-          controls: true,
-          progress: true,
-          slideNumber: true,
-          transition: 'fade'
+            plugins: [RevealHighlight, RevealNotes],
+            showNotes: false,
+            controls: true,
+            progress: true,
+            slideNumber: true,
+            transition: 'fade',
+            pdfSeparateFragments: false,
+            pdfMaxPagesPerSlide: 1,
         });
-      });
-    </script>
-  </body>
+    });
+</script>
+<!-- JS 用 Vite 模組來載入 -->
+<script type="module" src="/src/main.js"></script>
+</body>
 </html>
